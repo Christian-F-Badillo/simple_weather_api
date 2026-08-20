@@ -5,7 +5,7 @@ An asynchronous microservice built with FastAPI that functions as an API Gateway
 ## **Architectural Features**
 
 * **Dependency Inversion and Protocols:** Uses typing.Protocol to decouple concrete infrastructure implementations (HTTP client, caching layer) from domain logic.  
-* **Fault Tolerance (Null Object Pattern):** Implements sentinel objects (InactiveCacheBackend) allowing the service to operate in a degraded mode if the Redis instance is unavailable.  
+* **Fault Tolerance (Null Object Pattern):** Implements sentinel objects (InactiveCacheBackend) allowing the service to operate in a degraded mode if the Redis instance is unavailable (too implement).  
 * **Asynchronous Cache Optimization:**  
   * Geocoding cache (/search) with a 7-day TTL.  
   * Forecast (/forecast) and current weather (/current) cache with a 15 to 30-minute TTL.  
@@ -16,7 +16,7 @@ An asynchronous microservice built with FastAPI that functions as an API Gateway
 
 ```bash
 ├── src/  
-│   └── weather\_api/  
+│   └── weather_api/  
 │       ├── api/  
 │       │   ├── dependencies.py          # Lifecycle (lifespan) and dependency injection  
 │       │   └── v1/  
@@ -25,11 +25,11 @@ An asynchronous microservice built with FastAPI that functions as an API Gateway
 │       │           └── weather.py       # Current weather and forecast endpoints  
 │       ├── core/  
 │       │   ├── constants.py             # Global constants and configuration  
-│       │   ├── endpoint\_builders.py     # API URL construction functions  
+│       │   ├── endpoint_builders.py     # API URL construction functions  
 │       │   └── protocols.py             # Interface contracts and Null Object implementation  
 │       ├── schemas/  
-│       │   ├── api\_schemas.py           # Normalized DTOs and RootModels for public API  
-│       │   └── raw\_schemas.py           # External payload validation models  
+│       │   ├── api_schemas.py           # Normalized DTOs and RootModels for public API  
+│       │   └── raw_schemas.py           # External payload validation models  
 │       ├── services/  
 │       │   ├── cache.py                 # Adapter and resiliency layer over Redis  
 │       │   ├── search.py                # Geocoding business logic  
@@ -107,22 +107,22 @@ Once the application is running, interactive OpenAPI documentation is available 
 
 ### **Search & Geocoding**
 
-* GET /api/v1/search?q={city}\&lang={es|en}  
+* GET /api/v1/search?q={city}&lang={es|en}  
   * Returns an indexed map of geographic matches (SearchResultsMap) paired with coordinates and normalized names.
 
 ### **Current Weather**
 
-* GET /api/v1/weather/current?q={city}\&lang={es|en}  
+* GET /api/v1/weather/current?q={city}&lang={es|en}  
   * Returns current weather conditions by location name.
 
-* GET /api/v1/weather/current/coords?lat={latitude}\&lon={longitude}\&lang={es|en}  
+* GET /api/v1/weather/current/coords?lat={latitude}&lon={longitude}&lang={es|en}  
   * Returns current weather by resolving exact geographical coordinates.
 
 ### **Forecast**
 
-* GET /api/v1/weather/forecast?q={city}\&days={1-3}\&lang={es|en}  
+* GET /api/v1/weather/forecast?q={city}&days={1-3}&lang={es|en}  
   * Returns detailed weather forecast broken down by days and hours.  
-* GET /api/v1/weather/forecast/coords?lat={latitude}\&lon={longitude}\&days={1-3}\&lang={es|en}  
+* GET /api/v1/weather/forecast/coords?lat={latitude}&lon={longitude}&days={1-3}&lang={es|en}  
   * Returns weather forecast by exact geographical coordinates.
 
 ## **License**
