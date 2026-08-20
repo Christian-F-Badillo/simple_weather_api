@@ -5,7 +5,7 @@ An asynchronous microservice built with FastAPI that functions as an API Gateway
 ## **Architectural Features**
 
 * **Dependency Inversion and Protocols:** Uses typing.Protocol to decouple concrete infrastructure implementations (HTTP client, caching layer) from domain logic.  
-* **Fault Tolerance (Null Object Pattern):** Implements sentinel objects (InactiveCacheBackend) allowing the service to operate in a degraded mode if the Redis instance is unavailable (too implement).  
+* **Fault Tolerance (Null Object Pattern):** Implements sentinel objects (InactiveCacheBackend) allowing the service to operate in a degraded mode if the Redis instance is unavailable (to implement).  
 * **Asynchronous Cache Optimization:**  
   * Geocoding cache (/search) with a 7-day TTL.  
   * Forecast (/forecast) and current weather (/current) cache with a 15 to 30-minute TTL.  
