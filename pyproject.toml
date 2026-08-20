@@ -1,0 +1,27 @@
+[project]
+name = "weather-api"
+version = "0.1.0"
+description = "A simple weather proxy API."
+readme = "README.md"
+authors = [
+    { name = "Christian F. Badillo H.", email = "cris.badillo1408@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard-no-fastapi-cloud-cli]>=0.141.1",
+    "httpx>=0.28.1",
+    "pydantic>=2.13.4",
+    "python-dotenv>=1.2.3",
+    "redis>=8.1.0",
+    "uvicorn>=0.52.3",
+]
+
+[project.scripts]
+weather-api = "weather_api.main:main"
+
+[tool.fastapi]
+entrypoint = "weather_api.main:app"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
